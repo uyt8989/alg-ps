@@ -33,8 +33,9 @@ void dijkstra() {
 			visit[v] = 1;
 			
 			for (int j = 0; j < N; j++) {
-				if (dist[j] > dist[v] + adj[v][j])
-					dist[j] = dist[v] + adj[v][j];
+				if(visit[j] == 0)
+					if (dist[j] > dist[v] + adj[v][j])
+						dist[j] = dist[v] + adj[v][j];
 			}
 
 		}
