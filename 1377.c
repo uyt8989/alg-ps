@@ -8,7 +8,7 @@ typedef struct Arr {
 }Arr;
 
 int N;
-Arr a[500001];
+int a[500001];
 Arr sorted[500001];
 
 int MAX(int a, int b) {
@@ -53,9 +53,8 @@ int binary_search(int key, int idx) {
 int main() {
 	scanf("%d", &N);
 	for (int i = 1; i <= N; i++) {
-		scanf("%d", &a[i].data);
-		a[i].idx = i;
-		sorted[i].data = a[i].data;
+		scanf("%d", &a[i]);
+		sorted[i].data = a[i];
 		sorted[i].idx = i;
 	}
 	
@@ -64,7 +63,7 @@ int main() {
 	int ans = 0;
 	int sorted_idx;
 	for (int i = 1; i <= N; i++) {
-		sorted_idx = binary_search(a[i].data, i);
+		sorted_idx = binary_search(a[i], i);
 		if (sorted_idx < i) ans = MAX(ans, i - sorted_idx);
 	}
 	printf("%d\n", ans + 1);
