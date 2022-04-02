@@ -1,0 +1,59 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode *cur1, *cur2, *ans, *ans_cur;
+        bool is_carry = false;
+        
+        cur1 = l1; cur2 = l2;
+        
+        ans = new ListNode();
+        ans_cur = ans;
+        
+        while(cur1 || cur2) {
+            int a = 0, b = 0, carry = 0;
+            
+            if(is_carry) {
+                is_carry = false;
+                carry = 1;
+            }
+            
+            if(cur1) {
+                a = cur1->val;
+                cur1 = cur1->next;
+            }    
+            if(cur2) {
+                b = cur2->val;
+                cur2 = cur2->next;
+            }
+            
+            int res = a + b + carry;
+            
+            if(res >= 10) {
+                is_carry = true;
+                res -= 10;
+            }
+    
+            ans_cur->val = res;
+            if(cur1 || cur2){
+                ans_cur->next = new ListNode();
+                ans_cur = ans_cur->next;
+            }
+        }
+        
+        if(is_carry) {
+            ans_cur->next = new ListNode(1);
+        }
+        
+        return ans;
+    }
+};
