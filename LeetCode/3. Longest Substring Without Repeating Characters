@@ -1,0 +1,35 @@
+#include <queue>
+#include <set>
+
+using namespace std;
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string str) {
+        queue<char> q;
+        set<char> s;
+        int max = 0;
+        
+        for(int i = 0; i < str.length(); i++) {
+            if(s.find(str[i]) != s.end()) {
+                while(q.front() != str[i]) {
+                    s.erase(s.find(q.front()));
+                    q.pop();   
+                }
+                q.pop();
+                
+            }
+            else {
+                s.insert(str[i]);
+            }
+            
+            q.push(str[i]);
+            
+            if(max < q.size()) {
+                max = q.size();
+            }
+        }
+        
+        return max;
+    }
+};
